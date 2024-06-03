@@ -1,45 +1,111 @@
-/* Add styles for new elements */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #eef2f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.header-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    color: #333;
+    font-size: 2em;
+}
+
 .password-options {
     margin-bottom: 20px;
+    text-align: left;
 }
 
 .password-options label {
     display: block;
-    margin-bottom: 5px;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #555;
 }
 
-.password-options input[type="number"],
-.password-options input[type="checkbox"] {
+.password-options input[type="number"] {
+    width: 100%;
+    padding: 10px;
     margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    font-size: 1em;
 }
 
-.password-container button {
-    margin-left: 10px;
-}
-
-/* Add animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideInUp {
-    from {
-        transform: translateY(50px);
-    }
-    to {
-        transform: translateY(0);
-    }
-}
-
-.container {
-    animation: fadeIn 0.5s ease;
+.password-options input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
 }
 
 .password-container {
-    animation: slideInUp 0.5s ease;
+    margin-bottom: 20px;
+}
+
+.password-container input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 1.1em;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.password-container button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1em;
+}
+
+.password-container button:hover {
+    background-color: #0056b3;
+}
+
+.strength-meter {
+    text-align: left;
+}
+
+#strength-meter {
+    width: 100%;
+    height: 12px;
+    border-radius: 6px;
+}
+
+#strength-message {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
 }

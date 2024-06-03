@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Generator</title>
+    <title>PassSafe</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Password Generator</h1>
+        <img src="cybersecurity.jpeg" alt="Cybersecurity Image" class="header-image">
+        <h1>PassSafe</h1>
         <div class="password-options">
             <label for="length">Password Length:</label>
             <input type="number" id="length" min="6" max="24" value="12">
-            <label for="uppercase">Include Uppercase Letters:</label>
-            <input type="checkbox" id="uppercase" checked>
-            <label for="numbers">Include Numbers:</label>
-            <input type="checkbox" id="numbers" checked>
-            <label for="symbols">Include Symbols:</label>
-            <input type="checkbox" id="symbols" checked>
+            <label for="uppercase"><input type="checkbox" id="uppercase" checked>Include Uppercase Letters</label>
+            <label for="numbers"><input type="checkbox" id="numbers" checked>Include Numbers</label>
+            <label for="symbols"><input type="checkbox" id="symbols" checked>Include Symbols</label>
         </div>
         <div class="password-container">
             <input type="text" id="password" readonly>

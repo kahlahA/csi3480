@@ -1,74 +1,66 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var generateBtn = document.getElementById('generate-btn');
-    var copyBtn = document.getElementById('copy-btn');
-    var passwordInput = document.getElementById('password');
-    var lengthInput = document.getElementById('length');
-    var uppercaseInput = document.getElementById('uppercase');
-    var numbersInput = document.getElementById('numbers');
-    var symbolsInput = document.getElementById('symbols');
-    var strengthMeter = document.getElementById('strength-meter');
-    var strengthMessage = document.getElementById('strength-message');
+document.getElementById('generate-btn').addEventListener('click', generatePassword);
+document.getElementById('copy-btn').addEventListener('click', copyPassword);
 
-    generateBtn.addEventListener('click', generatePassword);
-    copyBtn.addEventListener('click', copyPassword);
+function generatePassword() {
+    const length = document.getElementById('length').value;
+    const includeUppercase = document.getElementById('uppercase').checked;
+    const includeNumbers = document.getElementById('numbers').checked;
+    const includeSymbols = document.getElementById('symbols').checked;
 
-    function generatePassword() {
-        var length = parseInt(lengthInput.value);
-        var charset = "abcdefghijklmnopqrstuvwxyz";
-        var password = "";
-        if (uppercaseInput.checked) charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        if (numbersInput.checked) charset += "0123456789";
-        if (symbolsInput.checked) charset += "!@#$%^&*()_+";
-        for (var i = 0; i < length; i++) {
-            var randomIndex = Math.floor(Math.random() * charset.length);
-            password += charset[randomIndex];
-        }
-        passwordInput.value = password;
-        var strength = checkPasswordStrength(password);
-        updateStrengthMeter(strength);
-        updateStrengthMessage(strength);
+    const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+    const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const numbers = '0123456789';
+    const symbols = '!@#$%^&*()_+[]{}|;:,.<>?';
+
+    let characters = lowercase;
+    if (includeUppercase) characters += uppercase;
+    if (includeNumbers) characters += numbers;
+    if (includeSymbols) characters += symbols;
+
+    let password = '';
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        password += characters[randomIndex];
     }
 
-    function checkPasswordStrength(password) {
-        var strength = 0;
-        if (password.length >= 8) {
-            strength++;
-        }
-        if (password.match(/[a-z]/)) {
-            strength++;
-        }
-        if (password.match(/[A-Z]/)) {
-            strength++;
-        }
-        if (password.match(/[0-9]/)) {
-            strength++;
-        }
-        if (password.match(/[!@#$%^&*()_+]/)) {
-            strength++;
-        }
-        return strength * 20;
-    }
+    document.getElementById('password').value = password;
+    evaluateStrength(password);
+}
 
-    function updateStrengthMeter(strength) {
-        strengthMeter.value = strength;
-    }
+function copyPassword() {
+    const passwordField = document.getElementById('password');
+    passwordField.select();
+    document.execCommand('copy');
+    alert('Password copied to clipboard');
+}
 
-    function updateStrengthMessage(strength) {
-        if (strength < 40) {
-            strengthMessage.textContent = "Password strength: Weak";
-            strengthMessage.style.color = "red";
-        } else if (strength < 80) {
-            strengthMessage.textContent = "Password strength: Medium";
-            strengthMessage.style.color = "orange";
-        } else {
-            strengthMessage.textContent = "Password strength: Strong";
-            strengthMessage.style.color = "green";
-        }
-    }
+function evaluateStrength(password) {
+    let strength = 0;
+    const length = password.length;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasNumbers = /[0-9]/.test(password);
+    const hasSymbols = /[!@#$%^&*()_+[\]{}|;:,.<>?]/.test(password);
 
-    function copyPassword() {
-        passwordInput.select();
-        document.execCommand('copy');
-        alert('Password copied to clipboard');
+    if (length >= 8) strength += 20;
+    if (hasLowercase) strength += 20;
+    if (hasUppercase) strength += 20;
+    if (hasNumbers) strength += 20;
+    if (hasSymbols) strength += 20;
+
+    const strengthMeter = document.getElementById('strength-meter');
+    const strengthMessage = document.getElementById('strength-message');
+
+    strengthMeter.value = strength;
+
+    if (strength <= 40) {
+        strengthMessage.textContent = 'Password strength: Weak';
+        strengthMessage.style.color = 'red';
+    } else if (strength <= 60) {
+        strengthMessage.textContent = 'Password strength: Medium';
+        strengthMessage.style.color = 'orange';
+    } else {
+        strengthMessage.textContent = 'Password strength: Strong';
+        strengthMessage.style.color = 'green';
     }
-});
+}
