@@ -1,0 +1,45 @@
+/* Add styles for new elements */
+.password-options {
+    margin-bottom: 20px;
+}
+
+.password-options label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.password-options input[type="number"],
+.password-options input[type="checkbox"] {
+    margin-bottom: 10px;
+}
+
+.password-container button {
+    margin-left: 10px;
+}
+
+/* Add animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 0.5s ease;
+}
+
+.password-container {
+    animation: slideInUp 0.5s ease;
+}
